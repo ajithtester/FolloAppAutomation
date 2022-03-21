@@ -1,13 +1,9 @@
 package com.folloit.stepdefinition;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 import com.follo.baseclass.Baseclass;
-import com.follo.baseclass.Registeration;
-
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Scenario;
+import com.follo.module.method.*;
+import com.follo.excel.read.ReadFrom;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,34 +11,36 @@ import io.cucumber.java.en.Then;
 public class AFollo_Register extends Baseclass {
 
 
-	@AfterStep("@Register")
-	public void ScreenShot(Scenario scenario) throws Throwable {
 
-		Thread.sleep(3000);
-		final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-		scenario.attach(screenshot, "image/png", "Refer the Screenshot"); 
-
-	}
 
 
 	@Given("User launching the app url")
 	public void user_launching_the_app_url() throws Throwable {
 
+
 		try {
 
 			LaunchTheDriver("Chrome", "URL", AppProperties);
 
-			if(getElement("GetStarted", RegisterPageLocators).isDisplayed()) {
-				System.out.println("Application launched successfully");
-				ExtentCucumberAdapter.addTestStepLog("Application launched successfully");
+			String Title =	PageTitle();		
+			if(Title.equalsIgnoreCase("Follo")) {
+
+				Print("Page title is : " + Title );
+				ExtentCucumberAdapter.addTestStepLog("Page title is : " + Title );
+
+				Print("Entered URL is : " + PropertyFile("URL", AppProperties) + ": Application launched successfully");
+				ExtentCucumberAdapter.addTestStepLog("Entered URL is : " + PropertyFile("URL", AppProperties) + ": Application launched successfully");
+			}
+			else {
+				PrintError("Get-Started button is not displayed : Application failed to launch successfully");
+				ExtentCucumberAdapter.addTestStepLog("Get-Started button is not displayed : Application failed to launch successfully");
 			}
 
 		} 
 
 		catch (Exception e) {
-
-			System.err.println("Application launched failed");
-			ExtentCucumberAdapter.addTestStepLog("Application launched failed");
+			PrintError("Application failed to launch successfully");
+			ExtentCucumberAdapter.addTestStepLog("Application failed to launch successfully");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
 		}
@@ -53,12 +51,12 @@ public class AFollo_Register extends Baseclass {
 	public void user_clicks_the_get_started_button() throws Throwable {
 
 		try {
-
-			Click("GetStarted", RegisterPageLocators);
-			System.out.println("Get Started button is clicked");
-
+			if(getElement("GetStarted", RegisterPageLocators).isDisplayed()) {
+				Click("GetStarted", RegisterPageLocators);
+				Print("Get Started button is clicked");
+			}
 		} catch (Exception e) {
-			System.err.println("Get Started button is not clicked");
+			PrintError("Get Started button is not clicked");
 			ExtentCucumberAdapter.addTestStepLog("Get Started button is not clicked");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -72,12 +70,12 @@ public class AFollo_Register extends Baseclass {
 		try {
 
 			if(getElement("EmailId", RegisterPageLocators).isDisplayed()) {
-				System.out.println("Welcome popup opened");
+				Print("Welcome popup opened");
 				ExtentCucumberAdapter.addTestStepLog("Welcome popup opened");
 			}
 		} 
 		catch (Exception e) {
-			System.err.println("Welcome popup not opened");
+			PrintError("Welcome popup not opened");
 			ExtentCucumberAdapter.addTestStepLog("Welcome popup not opened");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 		}
@@ -88,21 +86,21 @@ public class AFollo_Register extends Baseclass {
 
 		try {
 
-			TypeDataInTheField("EmailId", RegisterPageLocators, ReadDataFrom(0, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("EmailId is entered as : " + ReadDataFrom(0, 1 , "Register"));
-			System.out.println("EmailId is entered as : " + ReadDataFrom(0, 1 , "Register"));
+			TypeDataInTheField("EmailId", RegisterPageLocators, ReadFrom.Excel(0, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("EmailId is entered as : " + ReadFrom.Excel(0, 1 , "Register"));
+			Print("EmailId is entered as : " + ReadFrom.Excel(0, 1 , "Register"));
 
-			SelectFromDropdown("PhoneCode", RegisterPageLocators, ReadDataFrom(1, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("Phonecode is selected as : " + ReadDataFrom(1, 1 , "Register"));
-			System.out.println("Phonecode is selected as : " + ReadDataFrom(1, 1 , "Register"));
+			SelectFromDropdown("PhoneCode", RegisterPageLocators, ReadFrom.Excel(1, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("Phonecode is selected as : " + ReadFrom.Excel(1, 1 , "Register"));
+			Print("Phonecode is selected as : " + ReadFrom.Excel(1, 1 , "Register"));
 
-			TypeDataInTheField("Mobile", RegisterPageLocators, ReadDataFrom(2, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("Mobile number is entered as : " + ReadDataFrom(2, 1 , "Register"));
-			System.out.println("Mobile number is entered as : " + ReadDataFrom(2, 1 , "Register"));
+			TypeDataInTheField("Mobile", RegisterPageLocators, ReadFrom.Excel(2, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("Mobile number is entered as : " + ReadFrom.Excel(2, 1 , "Register"));
+			Print("Mobile number is entered as : " + ReadFrom.Excel(2, 1 , "Register"));
 		} 
 		catch (Exception e) {
 
-			System.err.println("Email and Mobile number is not filled");
+			PrintError("Email and Mobile number is not filled");
 			ExtentCucumberAdapter.addTestStepLog("Email and Mobile number is not filled successfully");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -114,14 +112,14 @@ public class AFollo_Register extends Baseclass {
 	public void user_clicks_the_continue_button() throws Throwable {
 
 		try {
-
-			Click("ContinueButton", RegisterPageLocators);
-			ExtentCucumberAdapter.addTestStepLog("Continue button is clicked");
-			System.out.println("Continue button is clicked");
-
+			if(getElement("ContinueButton", RegisterPageLocators).isDisplayed()) {
+				Click("ContinueButton", RegisterPageLocators);
+				ExtentCucumberAdapter.addTestStepLog("Continue button is clicked");
+				Print("Continue button is clicked");
+			}
 		}	
 		catch (Exception e) {
-			System.err.println("Continue button is not clicked");
+			PrintError("Continue button is not clicked");
 			ExtentCucumberAdapter.addTestStepLog("Continue button is not clicked");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 		}
@@ -134,14 +132,14 @@ public class AFollo_Register extends Baseclass {
 
 			WaitForTheElement("BasicDetailsPopup", RegisterPageLocators);
 			if(getElement("BasicDetailsPopup", RegisterPageLocators).isDisplayed()) {
-				System.out.println("Basic details popup is displayed");
+				Print("Basic details popup is displayed");
 				ExtentCucumberAdapter.addTestStepLog("Basic details popup is displayed");
 			}
 
 		} 	
 
 		catch (Exception e) {
-			System.err.println("Basic details popup is not displayed");
+			PrintError("Basic details popup is not displayed");
 			ExtentCucumberAdapter.addTestStepLog("Basic details popup is not displayed");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -155,20 +153,20 @@ public class AFollo_Register extends Baseclass {
 
 
 		try {
-			Thread.sleep(2000);
+			Wait(2000);
 			Waitfortheelement("FirstName", RegisterPageLocators);
 
 
-			TypeDataInTheField("FirstName", RegisterPageLocators, ReadDataFrom(3, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("First name is entered as : " + ReadDataFrom(3, 1 , "Register"));
-			System.out.println("First name is entered as : " + ReadDataFrom(3, 1 , "Register"));
+			TypeDataInTheField("FirstName", RegisterPageLocators, ReadFrom.Excel(3, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("First name is entered as : " + ReadFrom.Excel(3, 1 , "Register"));
+			Print("First name is entered as : " + ReadFrom.Excel(3, 1 , "Register"));
 
 
 
 			Waitfortheelement("LastName", RegisterPageLocators);
-			TypeDataInTheField("LastName", RegisterPageLocators, ReadDataFrom(4, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("Last name is entered as : " + ReadDataFrom(4, 1 , "Register"));
-			System.out.println("Last name is entered as : " + ReadDataFrom(4, 1 , "Register"));
+			TypeDataInTheField("LastName", RegisterPageLocators, ReadFrom.Excel(4, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("Last name is entered as : " + ReadFrom.Excel(4, 1 , "Register"));
+			Print("Last name is entered as : " + ReadFrom.Excel(4, 1 , "Register"));
 
 
 			ScrollDown();
@@ -177,13 +175,13 @@ public class AFollo_Register extends Baseclass {
 
 			Click("ContinueButton", RegisterPageLocators);
 			ExtentCucumberAdapter.addTestStepLog("Continue button is clicked");
-			System.out.println("Continue button is clicked");
+			Print("Continue button is clicked");
 
 		}
 
 
 		catch (Exception e) {
-			System.err.println("Basic details are not filled");
+			PrintError("Basic details are not filled");
 			ExtentCucumberAdapter.addTestStepLog("Basic details are not filled");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -193,73 +191,73 @@ public class AFollo_Register extends Baseclass {
 
 			if(getElement("Autofill", RegisterPageLocators).isDisplayed()) {
 				ExtentCucumberAdapter.addTestStepLog("Error message : Mandatory feilds to be filled : is displayed");
-				System.out.println("Error message : Mandatory feilds to be filled : is displayed");
+				Print("Error message : Mandatory feilds to be filled : is displayed");
 
 
 				MoveToElement("CompanyName", RegisterPageLocators);
 				ExtentCucumberAdapter.addTestStepLog("Moved to company name feild");
 
-				TypeDataInTheField("CompanyName", RegisterPageLocators, ReadDataFrom(7, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("Company name is entered as : " + ReadDataFrom(7, 1 , "Register"));
-				System.out.println("Company name is entered as : " + ReadDataFrom(7, 1 , "Register"));
-
-				//Thread.sleep(2000);
-
-				TypeDataInTheField("City", RegisterPageLocators, ReadDataFrom(10, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("City is entered as : " + ReadDataFrom(10, 1 , "Register"));
-				System.out.println("City is entered as : " + ReadDataFrom(10, 1 , "Register"));
-
-				//Thread.sleep(2000);
-
-				TypeDataInTheField("State", RegisterPageLocators, ReadDataFrom(11, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("State is entered as : " + ReadDataFrom(11, 1 , "Register"));
-				System.out.println("State is entered as : " + ReadDataFrom(11, 1 , "Register"));
-
-				//Thread.sleep(2000);
-
-				TypeDataInTheField("Country", RegisterPageLocators, ReadDataFrom(12, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("Country is entered as : " + ReadDataFrom(12, 1 , "Register"));
-				System.out.println("Country is entered as : " + ReadDataFrom(12, 1 , "Register"));
-
-				//Thread.sleep(2000);
+				TypeDataInTheField("CompanyName", RegisterPageLocators, ReadFrom.Excel(7, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("Company name is entered as : " + ReadFrom.Excel(7, 1 , "Register"));
+				Print("Company name is entered as : " + ReadFrom.Excel(7, 1 , "Register"));
 
 
-				TypeDataInTheField("Website", RegisterPageLocators, ReadDataFrom(14, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("Website is entered as : " + ReadDataFrom(14, 1 , "Register"));
-				System.out.println("Website is entered as : " + ReadDataFrom(14, 1 , "Register"));
+
+				TypeDataInTheField("City", RegisterPageLocators, ReadFrom.Excel(10, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("City is entered as : " + ReadFrom.Excel(10, 1 , "Register"));
+				Print("City is entered as : " + ReadFrom.Excel(10, 1 , "Register"));
 
 
-				TypeDataInTheField("CompanyAddress", RegisterPageLocators, ReadDataFrom(8, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("Company address is entered as : " + ReadDataFrom(8, 1 , "Register"));
-				System.out.println("Company address is entered as : " + ReadDataFrom(8, 1 , "Register"));
 
-				//Thread.sleep(2000);
+				TypeDataInTheField("State", RegisterPageLocators, ReadFrom.Excel(11, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("State is entered as : " + ReadFrom.Excel(11, 1 , "Register"));
+				Print("State is entered as : " + ReadFrom.Excel(11, 1 , "Register"));
+
+
+
+				TypeDataInTheField("Country", RegisterPageLocators, ReadFrom.Excel(12, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("Country is entered as : " + ReadFrom.Excel(12, 1 , "Register"));
+				Print("Country is entered as : " + ReadFrom.Excel(12, 1 , "Register"));
+
+
+
+
+				TypeDataInTheField("Website", RegisterPageLocators, ReadFrom.Excel(14, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("Website is entered as : " + ReadFrom.Excel(14, 1 , "Register"));
+				Print("Website is entered as : " + ReadFrom.Excel(14, 1 , "Register"));
+
+
+				TypeDataInTheField("CompanyAddress", RegisterPageLocators, ReadFrom.Excel(8, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("Company address is entered as : " + ReadFrom.Excel(8, 1 , "Register"));
+				Print("Company address is entered as : " + ReadFrom.Excel(8, 1 , "Register"));
+
+
 				ClickEnter();
 
-				//TypeDataInTheField("AddressLine", Register, ReadDataFrom(9, 1 , "Register"));
-				//Thread.sleep(2000);
+
 
 				ScrollDown();
 				ExtentCucumberAdapter.addTestStepLog("Scrolled down to continue button");
-				System.out.println("Scrolled down to continue button");
+				Print("Scrolled down to continue button");
 
-				TypeDataInTheField("ZipCode", RegisterPageLocators, ReadDataFrom(13, 1 , "Register"));
-				ExtentCucumberAdapter.addTestStepLog("ZipCode is entered as : " + ReadDataFrom(13, 1 , "Register"));
-				System.out.println("ZipCode is entered as : " + ReadDataFrom(13, 1 , "Register"));
+				Wait(2000);
+				TypeDataInTheField("ZipCode", RegisterPageLocators, ReadFrom.Excel(13, 1 , "Register"));
+				ExtentCucumberAdapter.addTestStepLog("ZipCode is entered as : " + ReadFrom.Excel(13, 1 , "Register"));
+				Print("ZipCode is entered as : " + ReadFrom.Excel(13, 1 , "Register"));
 
-				//Thread.sleep(2000);
+
 
 				Click("ContinueButton", RegisterPageLocators);
 				ExtentCucumberAdapter.addTestStepLog("ZContinue button is clicked");
-				System.out.println("ZContinue button is clicked");
+				Print("ZContinue button is clicked");
 
 
 			}
 
 
 		} catch (Exception e) {
-			System.out.println("Email domain already registered");
-			ExtentCucumberAdapter.addTestStepLog("Email domain already registered");
+			Print("Company address Auto-Filled");
+			ExtentCucumberAdapter.addTestStepLog("Company address Auto-Filled");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 		}
 
@@ -277,7 +275,7 @@ public class AFollo_Register extends Baseclass {
 
 			WaitForTheElement("ProjectDetailsPopup", RegisterPageLocators);
 			if(getElement("ProjectDetailsPopup", RegisterPageLocators).isDisplayed()) {
-				System.out.println("Project details popup is displayed");
+				Print("Project details popup is displayed");
 				ExtentCucumberAdapter.addTestStepLog("Project details popup is displayed");
 
 
@@ -285,7 +283,7 @@ public class AFollo_Register extends Baseclass {
 
 		} catch (Exception e) {
 
-			System.err.println("Project details popup is not displayed");
+			PrintError("Project details popup is not displayed");
 			ExtentCucumberAdapter.addTestStepLog("Project details popup is not displayed");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -298,17 +296,17 @@ public class AFollo_Register extends Baseclass {
 
 		try {
 
-			TypeDataInTheField("ProjectName", RegisterPageLocators, ReadDataFrom(5, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("Project name is entered as : " + ReadDataFrom(5, 1 , "Register"));
-			System.out.println("Project name is entered as : " + ReadDataFrom(5, 1 , "Register"));
+			TypeDataInTheField("ProjectName", RegisterPageLocators, ReadFrom.Excel(5, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("Project name is entered as : " + ReadFrom.Excel(5, 1 , "Register"));
+			Print("Project name is entered as : " + ReadFrom.Excel(5, 1 , "Register"));
 
 
 			Clear("ProjectAddress", RegisterPageLocators);
 			ExtentCucumberAdapter.addTestStepLog("Project address is cleared");
 
-			TypeDataInTheField("ProjectAddress", RegisterPageLocators, ReadDataFrom(6, 1 , "Register"));
-			ExtentCucumberAdapter.addTestStepLog("Project address is entered as : " + ReadDataFrom(6, 1 , "Register"));
-			System.out.println("Project address is entered as : " + ReadDataFrom(6, 1 , "Register"));
+			TypeDataInTheField("ProjectAddress", RegisterPageLocators, ReadFrom.Excel(6, 1 , "Register"));
+			ExtentCucumberAdapter.addTestStepLog("Project address is entered as : " + ReadFrom.Excel(6, 1 , "Register"));
+			Print("Project address is entered as : " + ReadFrom.Excel(6, 1 , "Register"));
 
 			ClickEnter();
 			Thread.sleep(2000);
@@ -317,7 +315,7 @@ public class AFollo_Register extends Baseclass {
 
 
 		} catch (Exception e) {
-			System.err.println("Project details are not filled");
+			PrintError("Project details are not filled");
 			ExtentCucumberAdapter.addTestStepLog("Project details are not filled");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -331,15 +329,16 @@ public class AFollo_Register extends Baseclass {
 
 
 		try {
+
 			Waitfortheelement("NextButton", RegisterPageLocators);
 			Click("NextButton", RegisterPageLocators);
 			ExtentCucumberAdapter.addTestStepLog("Next button is clicked");
-			System.out.println("Next button is clicked");
+			Print("Next button is clicked");
 
 
 		}
 		catch (Exception e) {
-			System.err.println("Next button is not clicked");
+			PrintError("Next button is not clicked");
 			ExtentCucumberAdapter.addTestStepLog("Next button is not clicked");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -353,11 +352,11 @@ public class AFollo_Register extends Baseclass {
 		try {
 
 
-			Thread.sleep(2000);
+			Wait(2000);
 
 			WaitForTheElement("SubcriptionPage", RegisterPageLocators);
 			if(getElement("SubcriptionPage", RegisterPageLocators).isDisplayed()) {
-				System.out.println("Subcription page is displayed");
+				Print("Subcription page is displayed");
 				ExtentCucumberAdapter.addTestStepLog("Subcription page is displayed");
 
 
@@ -365,8 +364,8 @@ public class AFollo_Register extends Baseclass {
 
 		}
 		catch (Exception e) {
-			System.err.println("Subcription page is not displayed");
-			System.err.println(e.getMessage());
+			PrintError("Subcription page is not displayed");
+			PrintError(e.getMessage());
 			ExtentCucumberAdapter.addTestStepLog("Subcription page is not displayed");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
@@ -380,14 +379,14 @@ public class AFollo_Register extends Baseclass {
 
 		try {
 			ScrollDown();
-			Registeration.SelectPlan(ReadDataFrom(17, 0, "Register"));
-			ExtentCucumberAdapter.addTestStepLog("Plan is selected as : " + (ReadDataFrom(17, 0, "Register")));
+			Registeration.SelectPlan(ReadFrom.Excel(17, 0, "Register"));
+			ExtentCucumberAdapter.addTestStepLog("Plan is selected as : " + (ReadFrom.Excel(17, 0, "Register")));
 
-			System.out.println("Plan selected : " + ReadDataFrom(17, 0, "Register"));
+			Print("Plan selected : " + ReadFrom.Excel(17, 0, "Register"));
 		}
 		catch (Exception e) {
-			System.err.println("Plan is not selected");
-			System.err.println(e.getMessage());
+			PrintError("Plan is not selected");
+			PrintError(e.getMessage());
 			ExtentCucumberAdapter.addTestStepLog("Project details are not filled");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 		}
@@ -404,19 +403,18 @@ public class AFollo_Register extends Baseclass {
 
 
 			if(getElement("Email", LoginPageLocators).isDisplayed()) {
-				System.out.println("Login page is displayed");
-				ExtentCucumberAdapter.addTestStepLog("Login page is displayed");
+				Print("User redirected to the login page after selecting the plan");
+				ExtentCucumberAdapter.addTestStepLog("User redirected to the login page after selecting the plan");
 			}
 
 		} 
 
 		catch (Exception e) {
 
-			System.err.println("Login page is not displayed");
-			ExtentCucumberAdapter.addTestStepLog("Login page is not displayed");
+			PrintError("User not redirected to the login page");
+			ExtentCucumberAdapter.addTestStepLog("User not redirected to the login page after selecting the plan");
 			ExtentCucumberAdapter.addTestStepLog("User may have selected enterprise plan");
-			System.out.println("User may have selected enterprise plan");
-
+			Print("User not redirected to the login page after selecting the plan");
 			ExtentCucumberAdapter.addTestStepLog(e.getMessage());
 
 		}

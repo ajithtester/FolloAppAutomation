@@ -1,20 +1,54 @@
+
+
 package com.follo.enginerunner;
 
-import org.junit.runner.RunWith;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}, features = { "Features_SP1" }, 
-glue = { "com\\folloit\\stepdefinition" }, //tags = "@Register", 
-tags = "@Login",
-//tags = "@Regression", 
+@CucumberOptions(plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+
+tags = "@Regression", 
+//tags = "@Register",
+//tags = "@Login",
+//tags = "@ForgotPassword",
+features = "Features_SP1", 
+glue = {"com\\folloit\\stepdefinition", "\\com\\follo\\Hooks"  }, 
 dryRun= false)
-
-public class EngineRunner {
-
-
+public class EngineRunner extends AbstractTestNGCucumberTests {
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//JUNIT
+//@RunWith(Cucumber.class)
+//@CucumberOptions(plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}, features = { "Features_SP1" }, 
+//glue = { "com\\folloit\\stepdefinition", "\\com\\follo\\Hooks"  }, //tags = "@Register", 
+//tags = "@Login",
+////tags = "@Regression", 
+//dryRun= false)
+
+//public class EngineRunner {
+//
+//
+//
+//}
+
+
+
+
+
+
+
 
 

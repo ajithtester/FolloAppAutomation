@@ -3,23 +3,12 @@ package com.follo.baseclass;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
-import java.util.function.Function;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.assertj.core.api.ErrorCollector;
-import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,6 +19,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
+
+
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -55,7 +47,7 @@ public class Baseclass {
 
 
 
-	public static String ExcelData = "./src/main/java/com/folloit/excel/Follo_WebApp_Datas.xlsx";
+
 
 	public static String PropertyFile(String AppProperties , String locatorfile ) throws Throwable {
 
@@ -65,6 +57,21 @@ public class Baseclass {
 		Prop.load(File);
 		return properties = Prop.getProperty(AppProperties);
 	}
+	
+	public static void Print(String PrintValue) throws Throwable {
+		
+		System.out.println(PrintValue);
+
+	
+	}
+	public static void PrintError(String PrintValue) throws Throwable {
+		
+		System.err.println(PrintValue);
+
+	
+	}
+	
+	
 
 
 	public static void LaunchTheDriver(String Browser, String locator, String locatorfile ) throws Throwable {
@@ -98,38 +105,58 @@ public class Baseclass {
 
 	}
 
-	public static void WaitForTheElement(String Locator, String locatorfile) throws Throwable {
+	public static void ClickClick(String Locator, String locatorfile) throws Throwable {
 		WebDriverWait wait = new WebDriverWait(driver, 120);
 		wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile))).click();
+	}
+	
+	public static WebElement WaitForTheElement(String Locator, String locatorfile) throws Throwable {
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		return wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
 	}
 
 
 	public static void Waitfortheelement(String Locator, String locatorfile) throws Throwable {
 
-		// Waiting 30 seconds for an element to be present on the page, checking
-		// for its presence once every 5 seconds.
-		Wait C = new FluentWait<WebDriver>(driver)
+
+		Wait waits = new FluentWait<WebDriver>(driver)
 				.withTimeout(Duration.ofSeconds(120))
 				.pollingEvery(Duration.ofSeconds(5))
 				.ignoring(NoSuchElementException.class);
 
 
-		C.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
+		waits.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
 
 
 	}
 
+	public static void Wait(int Wait) throws Throwable {
 
+		Thread.sleep(Wait);
 
-	public static boolean softassert(String Condition1 , String Condition2) {
-		
-		SoftAssertions softAssertions = new SoftAssertions();
-		softAssertions.assertThat(Condition1).isEqualTo(Condition2);
-		softAssertions.assertAll();
+	}
+
+	public static WebElement FindElement(String locator, int i, String locators) throws Throwable {
+
+		return driver.findElement(By.xpath(locator + i + locators));
+	}
+	
+	public static WebElement FindTheElement(String locator) throws Throwable {
+
+		return driver.findElement(By.xpath(locator));
+	}
+
+	public static boolean softassert(String OriginalValue , String ExpectedValue) {
+
+		SoftAssert softassert = new SoftAssert();
+		softassert.assertEquals(OriginalValue, ExpectedValue);
+		softassert.assertAll();
 		return false;
+
+
 	}
-	
-	
+
+
 	public static WebElement getElement(String Locator, String locatorfile) throws Throwable {
 
 
@@ -142,16 +169,36 @@ public class Baseclass {
 		Value = Prop.getProperty(Locator).split(" ", 2)[1];
 		switch (EleType) {
 		case "id":
-			WebDriverWait wait = new WebDriverWait(driver, 120);
-			return	wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id(Value))));
+			WebDriverWait id = new WebDriverWait(driver, 120);
+			return	id.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id(Value))));
 
 		case "xpath":
-			WebDriverWait wait1 = new WebDriverWait(driver, 120);
-			return	wait1.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(Value))));
+			WebDriverWait xpath = new WebDriverWait(driver, 120);
+			return	xpath.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(Value))));
+		case "css":
+			WebDriverWait css = new WebDriverWait(driver, 120);
+			return	css.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(Value))));
+		case "tag":
+			WebDriverWait tag = new WebDriverWait(driver, 120);
+			return	tag.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.tagName(Value))));
+		case "partialText":
+			WebDriverWait partialText = new WebDriverWait(driver, 120);
+			return	partialText.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.partialLinkText(Value))));
+		case "linkText":
+			WebDriverWait linkText = new WebDriverWait(driver, 120);
+			return	linkText.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.linkText(Value))));
+		case "name":
+			WebDriverWait name = new WebDriverWait(driver, 120);
+			return	name.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.name(Value))));
+		case "className":
+			WebDriverWait className = new WebDriverWait(driver, 120);
+			return	className.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.className(Value))));
+
+
 
 		default:
-			WebDriverWait wait2 = new WebDriverWait(driver, 120);
-			return	wait2.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(Value))));
+			WebDriverWait defaultvalue = new WebDriverWait(driver, 120);
+			return	defaultvalue.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(Value))));
 
 
 		}
@@ -168,12 +215,35 @@ public class Baseclass {
 		EleType = Prop.getProperty(Locator).split(" ")[0];
 		Value = Prop.getProperty(Locator).split(" ", 2)[1];
 		switch (EleType) {
+
 		case "id":
 			return ElementNames =  driver.findElements(By.id(Value));
 		case "xpath":
 			return ElementNames = driver.findElements(By.xpath(Value));
+		case "css":
+
+			return ElementNames =driver.findElements(By.cssSelector(Value));
+		case "tag":
+
+			return ElementNames =driver.findElements(By.tagName(Value));
+
+		case "partialText":
+			return ElementNames =driver.findElements(By.partialLinkText(Value));
+
+		case "linkText":
+			return ElementNames =driver.findElements(By.linkText(Value));
+
+		case "name":
+			return ElementNames =driver.findElements(By.name(Value));
+
+		case "className":
+			return ElementNames =driver.findElements(By.className(Value));
+
+
+
 		default:
 			return ElementNames = driver.findElements(By.xpath(Value));
+
 
 		}
 
@@ -188,18 +258,6 @@ public class Baseclass {
 
 	}
 
-	public static String ReadDataFrom(int row, int col, String sheetname) throws Throwable {
-
-
-		File file = new File(ExcelData);
-		FileInputStream fis = new FileInputStream(file);
-		Workbook W = WorkbookFactory.create(fis);
-		Sheet S = W.getSheet(sheetname);
-		Row r = S.getRow(row);
-		Cell s = r.getCell(col);
-		String data = s.toString();
-		return data;
-	}
 
 	public static void Click(String Locator,String locatorfile ) throws Throwable {
 
@@ -217,36 +275,16 @@ public class Baseclass {
 	} 
 
 
-	//	public static void Click(String Locator, String locatorfile) throws Throwable {
-	//
-	//
-	//		Wait C = new FluentWait<WebDriver>(driver)
-	//				.withTimeout(Duration.ofSeconds(200))
-	//				.pollingEvery(Duration.ofSeconds(10))
-	//				.ignoring(NoSuchElementException.class);
-	//
-	//
-	//		C.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
-	//		getElement(Locator, locatorfile).click();
-	//
-	//	}
-	//
-	//	public static void TypeDataInTheField ( String Locator,String locatorfile, String Data) throws Throwable {
-	//
-	//	
-	//		getElement(Locator, locatorfile).sendKeys(Data);
-	//	} 
-
 
 	public static void SelectFromDropdown(String Locator,String locatorfile, String MobileCode) throws Throwable {
 
-		Wait C = new FluentWait<WebDriver>(driver)
+		Wait waits = new FluentWait<WebDriver>(driver)
 				.withTimeout(Duration.ofSeconds(200))
 				.pollingEvery(Duration.ofSeconds(10))
 				.ignoring(NoSuchElementException.class);
 
 
-		C.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
+		waits.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
 		WebElement Code = 	getElement(Locator, locatorfile);
 
 		Select PhoneCode = new Select(Code);
@@ -257,22 +295,23 @@ public class Baseclass {
 
 	public static void ScrollDown()throws Throwable {
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		JavascriptExecutor scrolldown = (JavascriptExecutor) driver;
+		scrolldown.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 	}
 
 
 	public static void ClickEnter()throws Throwable {
-		Robot upf = new Robot();
 
-		upf.keyPress(KeyEvent.VK_ENTER);
+		Robot robot = new Robot();
+
+		robot.keyPress(KeyEvent.VK_ENTER);
 
 	}
 
 	public static void ClickTab()throws Throwable {
-		Robot upf = new Robot();
+		Robot robot = new Robot();
 
-		upf.keyPress(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_TAB);
 
 
 	}
@@ -280,10 +319,10 @@ public class Baseclass {
 	public static void ClickPageDown()throws Throwable {
 
 
-		Robot upf = new Robot();
+		Robot robot = new Robot();
 
 
-		upf.keyPress(KeyEvent.VK_PAGE_DOWN);
+		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
 
 	}
 
@@ -292,6 +331,13 @@ public class Baseclass {
 		WebDriverWait wait = new WebDriverWait(driver, 120);
 		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
 		return Element.getText();
+	} 
+
+	public static String GetAttr ( String Locator,String locatorfile, String Attribute) throws Throwable {
+
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
+		return Element.getAttribute(Attribute);
 	} 
 
 
@@ -303,11 +349,10 @@ public class Baseclass {
 		element.clear();
 
 	}
-	
+
 	public static String PageTitle () throws Throwable {
 
 		Title = driver.getTitle();
-		System.out.println("Page Title : " + Title);
 		return Title;
 
 	}

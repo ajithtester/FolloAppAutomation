@@ -1,100 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="15" passed="15" failed="0" skipped="0">
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-03-18T19:19:40 IST" name="Default suite" finished-at="2022-03-18T19:30:40 IST" duration-ms="660010">
+  <suite started-at="2022-03-22T20:38:34 IST" name="Default suite" finished-at="2022-03-22T20:40:39 IST" duration-ms="125347">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2022-03-18T19:19:40 IST" name="Default test" finished-at="2022-03-18T19:30:40 IST" duration-ms="660010">
+    <test started-at="2022-03-22T20:38:34 IST" name="Default test" finished-at="2022-03-22T20:40:39 IST" duration-ms="125347">
       <class name="com.follo.enginerunner.EngineRunner">
-        <test-method is-config="true" signature="setUpClass()[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:19:41 IST" name="setUpClass" finished-at="2022-03-18T19:19:42 IST" duration-ms="1088" status="PASS">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-22T20:38:34 IST" name="setUpClass" finished-at="2022-03-22T20:38:35 IST" duration-ms="1118" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:19:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:20:10 IST" duration-ms="27871" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Launch the app URL and navigate to register popup"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the Register feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:20:10 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:20:19 IST" duration-ms="9843" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Filling the mailId and phone number"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the Register feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:20:19 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:20:28 IST" duration-ms="8382" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Filling the basic details"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the Register feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:20:28 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:20:41 IST" duration-ms="13158" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Filling the project details"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the Register feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:20:41 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:21:07 IST" duration-ms="25801" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["User selects the subscription plan"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the Register feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:21:07 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:21:31 IST" duration-ms="24590" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-22T20:38:35 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-22T20:38:59 IST" duration-ms="24194" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -110,7 +30,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:21:31 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:22:20 IST" duration-ms="48427" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-22T20:38:59 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-22T20:39:26 IST" duration-ms="27103" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -126,7 +46,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:22:20 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:22:40 IST" duration-ms="20130" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-22T20:39:26 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-22T20:39:46 IST" duration-ms="20199" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -142,119 +62,23 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:22:40 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:23:09 IST" duration-ms="28683" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-22T20:39:46 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-22T20:40:31 IST" duration-ms="44779" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Add DFOW list"]]>
+                <![CDATA["To navigate to Company feature"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
+                <![CDATA["Optional[To verify the Company feature]"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:23:09 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:24:17 IST" duration-ms="68700" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Search DFOW"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:24:17 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:24:25 IST" duration-ms="7352" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Export DFOW list"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:24:25 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:27:15 IST" duration-ms="170337" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Edit a DFOW from the list"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:27:15 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:27:39 IST" duration-ms="24268" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Delete a DFOW from the list"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:27:39 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:27:51 IST" duration-ms="11828" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Delete all DFOW from the list"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:27:51 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-18T19:30:14 IST" duration-ms="142834" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Import DFOW list"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Optional[To verify the DFOW feature]"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-18T19:30:14 IST" name="tearDownClass" finished-at="2022-03-18T19:30:40 IST" duration-ms="26620" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.follo.enginerunner.EngineRunner@49049a04]" started-at="2022-03-22T20:40:31 IST" name="tearDownClass" finished-at="2022-03-22T20:40:39 IST" duration-ms="7888" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

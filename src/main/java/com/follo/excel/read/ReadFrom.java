@@ -2,6 +2,7 @@ package com.follo.excel.read;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -10,6 +11,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -19,18 +21,24 @@ import com.follo.baseclass.Baseclass;
 
 public class ReadFrom extends Baseclass {
 
-	public static String ExcelData = "./src/main/java/com/follo/excelfile/Follo_WebApp_Datas.xlsx";
+	// public static String ExcelData = "./src/main/java/com/follo/excelfile/Follo_WebApp_Datas.xlsx";
+	public static String ExcelData = "./src/test/resources/Follo_WebApp_Datas.xlsx";
 	public static  int rowcount;
+	public static  int colcount;
+	public static XSSFWorkbook Workbook;
 	public static XSSFSheet Sheet;
 	public static String AddDFOW = "AddDFOW";
 	public static String DeleteDFOW = "DeleteDFOW";
 	public static String EditDFOW  = "EditDFOW";
 	public static String SearchDFOW  = "SearchDfow";
-	
+	public static String AddCompany  = "AddCompany";
+	public static String Dfow  = "AddCompanyDfow";
 	
 
+
+
 	public static String UploadDfowFile = "C:\\Users\\ajithkumar.j\\Downloads\\DFOW.xlsx";
-	
+
 
 
 
@@ -51,15 +59,13 @@ public class ReadFrom extends Baseclass {
 
 		FileInputStream fileread = new FileInputStream(ExcelData);
 
-		XSSFWorkbook workbook = new XSSFWorkbook(fileread);
-		Sheet = workbook.getSheet(Sheetname);
+		Workbook = new XSSFWorkbook(fileread);
+		Sheet = Workbook.getSheet(Sheetname);
 		rowcount = Sheet.getLastRowNum();
 		return rowcount;
 
-
 	}
-
-
-
-
 }
+
+
+

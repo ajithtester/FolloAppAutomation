@@ -44,10 +44,108 @@ public class Baseclass {
 	public static String RegisterPageLocators = "./src/test/java/com/follo/pagelocators/AFollo_Register.properties";
 	public static String LoginPageLocators = "./src/test/java/com/follo/pagelocators/Follo_01_Login.properties";
 	public static String DFOWLocators = "./src/test/java/com/follo/pagelocators/Follo_02_DFOW.properties";
+	public static String CompaniesLocators = "./src/test/java/com/follo/pagelocators/Follo_03_Companies.properties";
+	
 
 
+	public static void Click(String Locator,String locatorfile ) throws Throwable {
+
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile))).click();
+
+	}
+
+	public static void TypeDataInTheField ( String Locator,String locatorfile, String Data) throws Throwable {
+
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
+		Element.sendKeys(Data);
+	} 
+
+	public static void SelectFromDropdown(String Locator,String locatorfile, String MobileCode) throws Throwable {
+
+		Wait waits = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(200))
+				.pollingEvery(Duration.ofSeconds(10))
+				.ignoring(NoSuchElementException.class);
 
 
+		waits.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
+		WebElement Code = 	getElement(Locator, locatorfile);
+
+		Select PhoneCode = new Select(Code);
+		PhoneCode.selectByValue(MobileCode);
+
+
+	}
+
+
+	public static void ScrollDown()throws Throwable {
+
+		JavascriptExecutor scrolldown = (JavascriptExecutor) driver;
+		scrolldown.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+	}
+
+	
+	public static void MoveToElement(String Locator, String locatorfile ) throws Throwable {
+
+		Actions action = new Actions(driver);
+
+		action.moveToElement(getElement(Locator, locatorfile)).perform();
+
+	}
+
+	public static void ClickEnter()throws Throwable {
+
+		Robot robot = new Robot();
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+
+	}
+
+	public static void ClickTab()throws Throwable {
+		Robot robot = new Robot();
+
+		robot.keyPress(KeyEvent.VK_TAB);
+
+
+	}
+
+	public static void ClickPageDown()throws Throwable {
+
+
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+
+	}
+
+	public static String GetText ( String Locator,String locatorfile) throws Throwable {
+
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
+		return Element.getText();
+	} 
+
+	public static void Clear (String Locator, String locatorfile ) throws Throwable {
+
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		WebElement element = 	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
+
+		element.clear();
+
+	}	public static String GetAttr ( String Locator,String locatorfile, String Attribute) throws Throwable {
+
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
+		return Element.getAttribute(Attribute);
+	} 
+
+	public static String PageTitle () throws Throwable {
+
+		Title = driver.getTitle();
+		return Title;
+
+	}
 
 	public static String PropertyFile(String AppProperties , String locatorfile ) throws Throwable {
 
@@ -57,22 +155,19 @@ public class Baseclass {
 		Prop.load(File);
 		return properties = Prop.getProperty(AppProperties);
 	}
-	
+
 	public static void Print(String PrintValue) throws Throwable {
-		
+
 		System.out.println(PrintValue);
 
-	
+
 	}
 	public static void PrintError(String PrintValue) throws Throwable {
-		
+
 		System.err.println(PrintValue);
 
-	
-	}
-	
-	
 
+	}
 
 	public static void LaunchTheDriver(String Browser, String locator, String locatorfile ) throws Throwable {
 
@@ -105,11 +200,11 @@ public class Baseclass {
 
 	}
 
-	public static void ClickClick(String Locator, String locatorfile) throws Throwable {
+	public static void Clicks(String Locator, String locatorfile) throws Throwable {
 		WebDriverWait wait = new WebDriverWait(driver, 120);
 		wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile))).click();
 	}
-	
+
 	public static WebElement WaitForTheElement(String Locator, String locatorfile) throws Throwable {
 		WebDriverWait wait = new WebDriverWait(driver, 120);
 		return wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
@@ -140,7 +235,7 @@ public class Baseclass {
 
 		return driver.findElement(By.xpath(locator + i + locators));
 	}
-	
+
 	public static WebElement FindTheElement(String locator) throws Throwable {
 
 		return driver.findElement(By.xpath(locator));
@@ -250,110 +345,5 @@ public class Baseclass {
 	}
 
 
-	public static void MoveToElement(String Locator, String locatorfile ) throws Throwable {
 
-		Actions action = new Actions(driver);
-
-		action.moveToElement(getElement(Locator, locatorfile)).perform();
-
-	}
-
-
-	public static void Click(String Locator,String locatorfile ) throws Throwable {
-
-		WebDriverWait wait = new WebDriverWait(driver, 120);
-		wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile))).click();
-
-	}
-
-
-	public static void TypeDataInTheField ( String Locator,String locatorfile, String Data) throws Throwable {
-
-		WebDriverWait wait = new WebDriverWait(driver, 120);
-		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
-		Element.sendKeys(Data);
-	} 
-
-
-
-	public static void SelectFromDropdown(String Locator,String locatorfile, String MobileCode) throws Throwable {
-
-		Wait waits = new FluentWait<WebDriver>(driver)
-				.withTimeout(Duration.ofSeconds(200))
-				.pollingEvery(Duration.ofSeconds(10))
-				.ignoring(NoSuchElementException.class);
-
-
-		waits.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
-		WebElement Code = 	getElement(Locator, locatorfile);
-
-		Select PhoneCode = new Select(Code);
-		PhoneCode.selectByValue(MobileCode);
-
-
-	}
-
-	public static void ScrollDown()throws Throwable {
-
-		JavascriptExecutor scrolldown = (JavascriptExecutor) driver;
-		scrolldown.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-	}
-
-
-	public static void ClickEnter()throws Throwable {
-
-		Robot robot = new Robot();
-
-		robot.keyPress(KeyEvent.VK_ENTER);
-
-	}
-
-	public static void ClickTab()throws Throwable {
-		Robot robot = new Robot();
-
-		robot.keyPress(KeyEvent.VK_TAB);
-
-
-	}
-
-	public static void ClickPageDown()throws Throwable {
-
-
-		Robot robot = new Robot();
-
-
-		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-
-	}
-
-	public static String GetText ( String Locator,String locatorfile) throws Throwable {
-
-		WebDriverWait wait = new WebDriverWait(driver, 120);
-		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
-		return Element.getText();
-	} 
-
-	public static String GetAttr ( String Locator,String locatorfile, String Attribute) throws Throwable {
-
-		WebDriverWait wait = new WebDriverWait(driver, 120);
-		WebElement Element =	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator,locatorfile)));
-		return Element.getAttribute(Attribute);
-	} 
-
-
-	public static void Clear (String Locator, String locatorfile ) throws Throwable {
-
-		WebDriverWait wait = new WebDriverWait(driver, 120);
-		WebElement element = 	wait.until(ExpectedConditions.elementToBeClickable(getElement(Locator, locatorfile)));
-
-		element.clear();
-
-	}
-
-	public static String PageTitle () throws Throwable {
-
-		Title = driver.getTitle();
-		return Title;
-
-	}
 }

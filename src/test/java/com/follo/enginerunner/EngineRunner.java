@@ -1,5 +1,6 @@
 
 
+
 package com.follo.enginerunner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -11,12 +12,13 @@ tags = "@Regression",
 //tags = "@Register",
 //tags = "@Login",
 //tags = "@ForgotPassword",
-features = "Features_SP1", 
-glue = {"com\\folloit\\stepdefinition", "\\com\\follo\\Hooks"  }, 
+features = {"Features_SP1" , "Features_SP2"}, 
+glue = {"com\\folloit\\stepdefinition\\sp1", "com\\folloit\\stepdefinition\\sp2", "\\com\\follo\\Hooks"  }, 
 dryRun= false)
 public class EngineRunner extends AbstractTestNGCucumberTests {
 
 }
+
 
 
 

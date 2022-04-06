@@ -6,7 +6,7 @@
       <class name="com.follo.enginerunner.EngineRunner">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="2 3"/>
+          <include name="runScenario" invocation-numbers="3"/>
           <include name="tearDownClass"/>
         </methods>
       </class> <!-- com.follo.enginerunner.EngineRunner -->

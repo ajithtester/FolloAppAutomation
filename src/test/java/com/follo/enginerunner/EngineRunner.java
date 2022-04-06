@@ -1,6 +1,3 @@
-
-
-
 package com.follo.enginerunner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -8,12 +5,18 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 
-tags = "@Regression", 
-//tags = "@Register",
+//tags = "@Regression", 
+//tags = "@dummy",
+tags = "@dummy3",
+
 //tags = "@Login",
 //tags = "@ForgotPassword",
-features = {"Features_SP1" , "Features_SP2"}, 
-glue = {"com\\folloit\\stepdefinition\\sp1", "com\\folloit\\stepdefinition\\sp2", "\\com\\follo\\Hooks"  }, 
+//tags = "@DFOW" ,
+
+
+features = {"Features_SP1" , "Features_SP2", "Features_SP3"}, 
+glue = {"com\\follo\\stepdefinition\\sp1", "com\\follo\\stepdefinition\\sp2", "com\\follo\\stepdefinition\\sp3", "\\com\\follo\\Hooks"}, 
+
 dryRun= false)
 public class EngineRunner extends AbstractTestNGCucumberTests {
 
@@ -33,6 +36,7 @@ public class EngineRunner extends AbstractTestNGCucumberTests {
 
 
 //JUNIT
+
 //@RunWith(Cucumber.class)
 //@CucumberOptions(plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}, features = { "Features_SP1" }, 
 //glue = { "com\\folloit\\stepdefinition", "\\com\\follo\\Hooks"  }, //tags = "@Register", 
@@ -45,6 +49,8 @@ public class EngineRunner extends AbstractTestNGCucumberTests {
 //
 //
 //}
+
+
 
 
 
